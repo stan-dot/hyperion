@@ -144,6 +144,7 @@ def test_read_hardware_for_ispyb_pre_collection(
     RE(read_run(undulator, synchrotron, slit_gaps, attenuator, flux))
 
 
+@pytest.mark.s03
 def test_xbpm_feedback_decorator(
     RE: RunEngine,
     fxc_composite: FlyScanXRayCentreComposite,
