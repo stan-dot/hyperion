@@ -46,6 +46,9 @@
         },
         "omega_start": {
             "type": "number"
+        },
+        "runnup_distance_mm": {
+            "type": "number"
         }
     },
     "minProperties": 12,

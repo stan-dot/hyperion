@@ -7,12 +7,12 @@
         "zocalo_environment": "dev_artemis",
         "experiment_type": "panda_flyscan_xray_centre",
         "detector_params": {
-            "current_energy_ev": 100,
-            "directory": "/tmp",
-            "prefix": "file_name",
-            "run_number": 0,
+            "current_energy_ev": 12700,
+            "directory": "/dls/i03/data/2023/cm33866-5/test_hyperion",
+            "prefix": "panda_test",
+            "run_number": 6,
             "use_roi_mode": false,
-            "det_dist_to_beam_converter_path": "src/hyperion/unit_tests/test_lookup_table.txt"
+            "det_dist_to_beam_converter_path": "/dls_sw/i03/software/daq_configuration/lookup/DetDistToBeamXYConverter.txt"
         },
         "ispyb_params": {
             "visit_path": "/tmp/cm31105-4/",
@@ -60,8 +60,8 @@
         "y_steps": 10,
         "z_steps": 2,
         "x_step_size": 0.1,
-        "y_step_size": 0.1,
-        "z_step_size": 0.1,
+        "y_step_size": 0.02,
+        "z_step_size": 0.02,
         "dwell_time_ms": 2,
         "runnup_distance_mm": 0.1,
         "x_start": 0.0,
@@ -69,8 +69,8 @@
         "y2_start": 0.0,
         "z1_start": 0.0,
         "z2_start": 0.0,
-        "exposure_time": 0.1,
+        "exposure_time": 0.004,
         "detector_distance": 100.0,
-        "omega_start": 0.0
+        "omega_start": 90.0
     }
 }
