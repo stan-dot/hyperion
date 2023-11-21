@@ -76,6 +76,8 @@ def setup_panda_for_flyscan(
 
     yield from bps.abs_set(panda.seq[1].table, seq_table)
 
+    yield from arm_panda_for_gridscan(panda, wait=True)
+
     # yield from bps.abs_set((panda.seq[1].table.))
 
     """ The sequencer table should be adjusted as follows:
@@ -106,18 +108,17 @@ def setup_panda_for_flyscan(
 
 
 def arm_panda_for_gridscan(panda: PandA, group="arm_panda_gridscan", wait=False):
-    yield from bps.abs_set(panda.seq[1].enable, True, group=group)
-    yield from bps.abs_set(panda.clock[1].enable, True, group=group)
-    yield from bps.abs_set(panda.pulse[1].enable, True, group=group)
+    yield from bps.abs_set(panda.seq[1].enable, "ONE", group=group)
+    yield from bps.abs_set(panda.pulse[1].enable, "ONE", group=group)
     yield from bps.wait(group="arm_panda_gridscan", timeout=GENERAL_TIMEOUT)
     if wait:
         yield from bps.wait(group=group, timeout=GENERAL_TIMEOUT)
 
 
 def disarm_panda_for_gridscan(panda, group="disarm_panda_gridscan", wait=False):
-    yield from bps.abs_set(panda.seq[1].enable, False, group=group)
-    yield from bps.abs_set(panda.clock[1].enable, False, group=group)
-    yield from bps.abs_set(panda.pulse[1].enable, False, group=group)
+    yield from bps.abs_set(panda.seq[1].enable, "ZERO", group=group)
+    yield from bps.abs_set(panda.clock[1].enable, "ZERO", group=group)
+    yield from bps.abs_set(panda.pulse[1].enable, "ZERO", group=group)
     yield from bps.wait(group="disarm_panda_gridscan", timeout=GENERAL_TIMEOUT)
     if wait:
         yield from bps.wait(group=group, timeout=GENERAL_TIMEOUT)
