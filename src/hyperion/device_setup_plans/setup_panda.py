@@ -104,8 +104,9 @@ def setup_panda_for_flyscan(
                 0,
                 (parameters.x_start * MM_TO_ENCODER_COUNTS),
                 (parameters.x_start * MM_TO_ENCODER_COUNTS)
-                + (parameters.x_step_size) * MM_TO_ENCODER_COUNTS,
-                0,
+                + (parameters.x_step_size)
+                * MM_TO_ENCODER_COUNTS,  # once we get back the num_x_steps PV, the table values should go to
+                0,  # x_step_size*num_x_steps*MM_TO_ENCODER_COUNTS
                 (parameters.x_start * MM_TO_ENCODER_COUNTS)
                 + (parameters.x_step_size * MM_TO_ENCODER_COUNTS),
                 (parameters.x_start * MM_TO_ENCODER_COUNTS),
