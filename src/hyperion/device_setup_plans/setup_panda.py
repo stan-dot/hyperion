@@ -104,9 +104,19 @@ def setup_panda_for_flyscan(
                 0,
                 (parameters.x_start * MM_TO_ENCODER_COUNTS),
                 (parameters.x_start * MM_TO_ENCODER_COUNTS)
-                + (parameters.x_step_size * parameters.x_steps * MM_TO_ENCODER_COUNTS),
+                + (
+                    parameters.x_step_size
+                    * (
+                        parameters.x_steps - 1
+                    )  # x_start is the first trigger point, so we need to travel to x_steps-1 for the final triger point
+                    * MM_TO_ENCODER_COUNTS
+                ),
                 (parameters.x_start * MM_TO_ENCODER_COUNTS)
-                + (parameters.x_step_size * parameters.x_steps * MM_TO_ENCODER_COUNTS),
+                + (
+                    parameters.x_step_size
+                    * (parameters.x_steps - 1)
+                    * MM_TO_ENCODER_COUNTS
+                ),
                 (parameters.x_start * MM_TO_ENCODER_COUNTS),
             ],
             dtype=np.int32,
