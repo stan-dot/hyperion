@@ -89,17 +89,16 @@ class BlueskyRunner:
 
         devices: Any = PLAN_REGISTRY[plan_name]["setup"](self.context)
 
-        if (
-            self.current_status.status == Status.BUSY.value
-            or self.current_status.status == Status.ABORTING.value
-        ):
+        if self.current_status.status in [
+            Status.BUSY.value,
+            Status.ABORTING.value,
+        ]:
             return StatusAndMessage(Status.FAILED, "Bluesky already running")
-        else:
-            self.current_status = StatusAndMessage(Status.BUSY)
-            self.command_queue.put(
-                Command(Actions.START, devices, experiment, parameters)
-            )
-            return StatusAndMessage(Status.SUCCESS)
+        self.current_status = StatusAndMessage(Status.BUSY)
+        self.command_queue.put(
+            Command(Actions.START, devices, experiment, parameters)
+        )
+        return StatusAndMessage(Status.SUCCESS)
 
     def stopping_thread(self):
         try:

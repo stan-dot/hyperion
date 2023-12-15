@@ -171,7 +171,7 @@ class RunEngineSimulator:
              document: the document to send
         """
         for callback_func, callback_docname in self.callbacks.values():
-            if callback_docname == "all" or callback_docname == document_name:
+            if callback_docname in ["all", document_name]:
                 callback_func(document_name, document)
 
     def simulate_plan(self, gen: Generator[Msg, object, object]) -> list[Msg]:

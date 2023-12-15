@@ -112,16 +112,18 @@ class GridscanInternalParameters(InternalParameters):
         return (num_frames_in_vds, size.width, size.height)
 
     def get_omega_start(self, scan_number: int) -> float:
-        assert (
-            scan_number == 1 or scan_number == 2
-        ), "Cannot provide parameters for other scans than 1 or 2"
+        assert scan_number in {
+            1,
+            2,
+        }, "Cannot provide parameters for other scans than 1 or 2"
         detector_params = self.hyperion_params.detector_params
         return detector_params.omega_start + 90 * (scan_number - 1)
 
     def get_run_number(self, scan_number: int) -> int:
-        assert (
-            scan_number == 1 or scan_number == 2
-        ), "Cannot provide parameters for other scans than 1 or 2"
+        assert scan_number in {
+            1,
+            2,
+        }, "Cannot provide parameters for other scans than 1 or 2"
         detector_params = self.hyperion_params.detector_params
         return detector_params.run_number + (scan_number - 1)
 

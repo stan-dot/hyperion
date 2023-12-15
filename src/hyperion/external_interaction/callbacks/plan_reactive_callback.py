@@ -31,8 +31,7 @@ class PlanReactiveCallback(CallbackBase):
         self.activity_uid = 0
 
     def start(self, doc: RunStart) -> RunStart | None:
-        callbacks_to_activate = doc.get("activate_callbacks")
-        if callbacks_to_activate:
+        if callbacks_to_activate := doc.get("activate_callbacks"):
             self.active = type(self).__name__ in callbacks_to_activate
             self.activity_uid = doc.get("uid")
         return self.activity_gated_start(doc) if self.active else doc

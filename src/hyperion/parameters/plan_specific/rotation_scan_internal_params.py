@@ -73,9 +73,7 @@ class RotationScanParams(BaseModel, AbstractExperimentParameterBase):
             return False
         if not limits.y.is_within(self.y):
             return False
-        if not limits.z.is_within(self.z):
-            return False
-        return True
+        return bool(limits.z.is_within(self.z))
 
     def get_num_images(self):
         return int(self.rotation_angle / self.image_width)

@@ -215,7 +215,7 @@ def test_nexus_writer_files_are_formatted_as_expected(
     for file in [single_dummy_file.nexus_file, single_dummy_file.master_file]:
         file_name = os.path.basename(file.name)
         expected_file_name_prefix = (
-            test_fgs_params.hyperion_params.detector_params.prefix + "_0"
+            f"{test_fgs_params.hyperion_params.detector_params.prefix}_0"
         )
         assert file_name.startswith(expected_file_name_prefix)
 

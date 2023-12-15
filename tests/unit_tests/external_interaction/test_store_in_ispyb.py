@@ -123,30 +123,26 @@ def dummy_params():
 
 @pytest.fixture
 def dummy_rotation_params():
-    dummy_params = RotationInternalParameters(
+    return RotationInternalParameters(
         **default_raw_params(
             "tests/test_data/parameter_json_files/good_test_rotation_scan_parameters.json"
         )
     )
-    return dummy_params
 
 
 @pytest.fixture
 def dummy_ispyb(dummy_params):
-    store_in_ispyb_2d = Store2DGridscanInIspyb(SIM_ISPYB_CONFIG, dummy_params)
-    return store_in_ispyb_2d
+    return Store2DGridscanInIspyb(SIM_ISPYB_CONFIG, dummy_params)
 
 
 @pytest.fixture
 def dummy_rotation_ispyb(dummy_rotation_params):
-    store_in_ispyb = StoreRotationInIspyb(SIM_ISPYB_CONFIG, dummy_rotation_params)
-    return store_in_ispyb
+    return StoreRotationInIspyb(SIM_ISPYB_CONFIG, dummy_rotation_params)
 
 
 @pytest.fixture
 def dummy_ispyb_3d(dummy_params):
-    store_in_ispyb_3d = Store3DGridscanInIspyb(SIM_ISPYB_CONFIG, dummy_params)
-    return store_in_ispyb_3d
+    return Store3DGridscanInIspyb(SIM_ISPYB_CONFIG, dummy_params)
 
 
 def test_get_current_time_string(dummy_ispyb):

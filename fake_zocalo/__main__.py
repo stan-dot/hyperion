@@ -27,8 +27,7 @@ DEV_ISPYB_CONFIG = "/dls_sw/dasc/mariadb/credentials/ispyb-dev.cfg"
 
 
 def load_configuration_file(filename):
-    conf = yaml.safe_load(Path(filename).read_text())
-    return conf
+    return yaml.safe_load(Path(filename).read_text())
 
 
 def get_dcgid_and_prefix(dcid: int, Session) -> Tuple[int, str]:
@@ -50,7 +49,7 @@ def get_dcgid_and_prefix(dcid: int, Session) -> Tuple[int, str]:
 
 
 def make_result(payload):
-    res = {
+    return {
         "environment": {"ID": "6261b482-bef2-49f5-8699-eb274cd3b92e"},
         "payload": {"results": payload},
         "recipe": {
@@ -65,7 +64,6 @@ def make_result(payload):
         "recipe-path": [],
         "recipe-pointer": 1,
     }
-    return res
 
 
 def main():

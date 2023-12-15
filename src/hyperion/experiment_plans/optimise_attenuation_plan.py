@@ -69,10 +69,7 @@ def check_parameters(
 
 
 def is_counts_within_target(total_count, lower_count_limit, upper_count_limit) -> bool:
-    if lower_count_limit <= total_count and total_count <= upper_count_limit:
-        return True
-    else:
-        return False
+    return lower_count_limit <= total_count <= upper_count_limit
 
 
 def arm_devices(xspress3mini: Xspress3Mini):
@@ -124,8 +121,7 @@ def deadtime_calc_new_transmission(
     """
     if direction == Direction.POSITIVE:
         transmission *= increment
-        if transmission > upper_transmission_limit:
-            transmission = upper_transmission_limit
+        transmission = min(transmission, upper_transmission_limit)
     else:
         transmission /= increment
     if transmission < lower_transmission_limit:
@@ -169,10 +165,8 @@ def is_deadtime_optimised(
                         as optimised value."
             )
             return True
-    # Once direction is flipped and deadtime goes back above threshold, we consider attenuation to be optimised.
-    else:
-        if deadtime <= deadtime_threshold:
-            return True
+    elif deadtime <= deadtime_threshold:
+        return True
     return False
 
 
@@ -352,7 +346,7 @@ def total_counts_optimisation(
         data = np.array(
             (yield from bps.rd(composite.xspress3mini.dt_corrected_latest_mca))
         )
-        total_count = sum(data[int(low_roi) : int(high_roi)])
+        total_count = sum(data[low_roi:high_roi])
         LOGGER.info(f"Total count is {total_count}")
 
         if is_counts_within_target(total_count, lower_count_limit, upper_count_limit):

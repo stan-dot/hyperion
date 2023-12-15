@@ -53,9 +53,7 @@ class IspybParams(BaseModel):
         cls, position: list[int | float] | np.ndarray, values: Dict[str, Any]
     ) -> np.ndarray:
         assert len(position) == 3
-        if isinstance(position, np.ndarray):
-            return position
-        return np.array(position)
+        return position if isinstance(position, np.ndarray) else np.array(position)
 
     transmission_fraction: float
     current_energy_ev: float

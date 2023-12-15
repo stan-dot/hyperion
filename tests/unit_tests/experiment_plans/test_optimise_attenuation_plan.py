@@ -57,7 +57,7 @@ def test_is_deadtime_optimised_returns_true_once_direction_is_flipped_and_deadti
 ):
     deadtime: float = 1
     direction = Direction.POSITIVE
-    for i in range(5):
+    for _ in range(5):
         assert is_deadtime_optimised(deadtime, 0.5, 0.5, 1, Direction.POSITIVE) is False
         direction = calculate_new_direction(direction, deadtime, 0.5)
         deadtime -= 0.1

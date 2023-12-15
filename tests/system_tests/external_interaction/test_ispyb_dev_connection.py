@@ -108,7 +108,7 @@ def test_can_store_2D_ispyb_data_correctly_when_in_error(
     if not success:
         ispyb.end_deposition("fail", "In error")
         expected_comments = [
-            e + " DataCollection Unsuccessful reason: In error"
+            f"{e} DataCollection Unsuccessful reason: In error"
             for e in expected_comments
         ]
     else:

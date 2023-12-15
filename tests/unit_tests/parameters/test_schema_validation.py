@@ -7,23 +7,17 @@ from dodal.devices.fast_grid_scan import GridScanParams
 from jsonschema import ValidationError
 
 schema_folder = "src/hyperion/parameters/schemas/"
-with open(schema_folder + "full_external_parameters_schema.json", "r") as f:
+with open(f"{schema_folder}full_external_parameters_schema.json", "r") as f:
     full_schema = json.load(f)
-with open(schema_folder + "hyperion_parameters_schema.json", "r") as f:
+with open(f"{schema_folder}hyperion_parameters_schema.json", "r") as f:
     hyperion_schema = json.load(f)
-with open(schema_folder + "detector_parameters_schema.json", "r") as f:
+with open(f"{schema_folder}detector_parameters_schema.json", "r") as f:
     detector_schema = json.load(f)
-with open(schema_folder + "ispyb_parameters_schema.json", "r") as f:
+with open(f"{schema_folder}ispyb_parameters_schema.json", "r") as f:
     ispyb_schema = json.load(f)
-with open(
-    schema_folder + "experiment_schemas/grid_scan_params_schema.json",
-    "r",
-) as f:
+with open(f"{schema_folder}experiment_schemas/grid_scan_params_schema.json", "r") as f:
     grid_scan_schema = json.load(f)
-with open(
-    schema_folder + "experiment_schemas/rotation_scan_params_schema.json",
-    "r",
-) as f:
+with open(f"{schema_folder}experiment_schemas/rotation_scan_params_schema.json", "r") as f:
     rotation_scan_schema = json.load(f)
 with open(
     "tests/test_data/parameter_json_files/good_test_parameters.json",
@@ -31,7 +25,7 @@ with open(
 ) as f:
     params = json.load(f)
 
-path = Path(schema_folder + "").absolute()
+path = Path(f"{schema_folder}").absolute()
 resolver = jsonschema.validators.RefResolver(
     base_uri=f"{path.as_uri()}/",
     referrer=True,
