@@ -57,8 +57,8 @@ def _destroy_loggers(loggers):
 def pytest_runtest_setup(item):
     markers = [m.name for m in item.own_markers]
     log_level = "DEBUG" if item.config.option.debug_logging else "INFO"
-    log_params = {"logging_level": log_level, "dev_mode": True}
     if "skip_log_setup" not in markers:
+        log_params = {"logging_level": log_level, "dev_mode": True}
         if LOGGER.handlers == []:
             if dodal_logger.handlers == []:
                 print(f"Initialising Hyperion logger for tests at {log_level}")
@@ -270,14 +270,13 @@ def fake_create_devices(
     smargon.omega.velocity.set = mock_omega_sets
     smargon.omega.set = mock_omega_sets
 
-    devices = {
+    return {
         "eiger": eiger,
         "smargon": smargon,
         "zebra": zebra,
         "detector_motion": detector_motion,
         "backlight": i03.backlight(fake_with_ophyd_sim=True),
     }
-    return devices
 
 
 @pytest.fixture()

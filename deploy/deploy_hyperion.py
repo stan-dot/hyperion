@@ -64,11 +64,10 @@ def get_hyperion_release_dir_from_args(repo: repo) -> str:
     )
 
     args = parser.parse_args()
-    if args.beamline == "dev":
-        print("Running as dev")
-        return "/tmp/hyperion_release_test/bluesky"
-    else:
+    if args.beamline != "dev":
         return f"/dls_sw/{args.beamline}/software/bluesky"
+    print("Running as dev")
+    return "/tmp/hyperion_release_test/bluesky"
 
 
 if __name__ == "__main__":

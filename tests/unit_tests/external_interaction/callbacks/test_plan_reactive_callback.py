@@ -23,8 +23,7 @@ class TestCallback(PlanReactiveCallback):
 
 @pytest.fixture
 def mocked_test_callback():
-    t = TestCallback()
-    return t
+    return TestCallback()
 
 
 @pytest.fixture

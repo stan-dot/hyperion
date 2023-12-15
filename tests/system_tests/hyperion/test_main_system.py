@@ -38,7 +38,7 @@ START_ENDPOINT = FGS_ENDPOINT + Actions.START.value
 STOP_ENDPOINT = Actions.STOP.value
 STATUS_ENDPOINT = Actions.STATUS.value
 SHUTDOWN_ENDPOINT = Actions.SHUTDOWN.value
-TEST_BAD_PARAM_ENDPOINT = "/fgs_real_params/" + Actions.START.value
+TEST_BAD_PARAM_ENDPOINT = f"/fgs_real_params/{Actions.START.value}"
 TEST_PARAMS = json.dumps(
     external_parameters.from_file(
         "tests/test_data/parameter_json_files/test_parameter_defaults.json"
@@ -103,7 +103,7 @@ class ClientAndRunEngine:
 
 
 def mock_dict_values(d: dict):
-    return {k: MagicMock() if k == "setup" or k == "run" else v for k, v in d.items()}
+    return {k: MagicMock() if k in ["setup", "run"] else v for k, v in d.items()}
 
 
 TEST_EXPTS = {
@@ -135,7 +135,7 @@ def test_env(request):
         {k: mock_dict_values(v) for k, v in PLAN_REGISTRY.items()}, **TEST_EXPTS
     )
     mock_context.plan_functions = {
-        k: MagicMock() for k in real_plans_and_test_exps.keys()
+        k: MagicMock() for k in real_plans_and_test_exps
     }
 
     with patch.dict(
@@ -169,9 +169,8 @@ def wait_for_run_engine_status(
         )
         if status_check(response_json["status"]):
             return response_json
-        else:
-            attempts -= 1
-            sleep(0.2)
+        attempts -= 1
+        sleep(0.2)
     assert False, "Run engine still busy"
 
 

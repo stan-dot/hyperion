@@ -95,8 +95,9 @@ class StoreInIspyb(ABC):
         assert (
             self.ispyb_params and self.detector_params
         ), "StoreInISPyB didn't acquire params"
-        visit_path_match = self.get_visit_string_from_path(self.ispyb_params.visit_path)
-        if visit_path_match:
+        if visit_path_match := self.get_visit_string_from_path(
+            self.ispyb_params.visit_path
+        ):
             return visit_path_match
         else:
             return self.get_visit_string_from_path(self.detector_params.directory)
@@ -139,7 +140,7 @@ class StoreInIspyb(ABC):
         ISPYB_LOGGER.info(
             f"End ispyb deposition with status '{success}' and reason '{reason}'."
         )
-        if success == "fail" or success == "abort":
+        if success in {"fail", "abort"}:
             run_status = "DataCollection Unsuccessful"
         else:
             run_status = "DataCollection Successful"

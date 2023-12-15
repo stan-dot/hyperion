@@ -70,7 +70,7 @@ def move_pin_into_view(
     """
 
     def pin_tip_valid(pin_x: float):
-        return pin_x != 0 and pin_x != oav.mxsc.pin_tip.INVALID_POSITION[0]
+        return pin_x not in [0, oav.mxsc.pin_tip.INVALID_POSITION[0]]
 
     for _ in range(max_steps):
         tip_x_px, tip_y_px = yield from trigger_and_return_pin_tip(oav.mxsc.pin_tip)

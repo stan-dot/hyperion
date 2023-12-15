@@ -48,16 +48,16 @@ def flatten_dict(d: dict, parent_items: dict = {}) -> dict:
         if isinstance(v, dict):
             flattened_subdict = flatten_dict(v, items)
             items.update(flattened_subdict)
-        else:
-            if (
+        elif (
                 k in items
                 or k in parent_items
                 and (items.get(k) or parent_items.get(k)) != v
             ):
-                raise Exception(
-                    f"Duplicate keys '{k}' in input parameters with differing values "
-                    f"'{v}' and '{(items.get(k) or parent_items.get(k))}'!"
-                )
+            raise Exception(
+                f"Duplicate keys '{k}' in input parameters with differing values "
+                f"'{v}' and '{(items.get(k) or parent_items.get(k))}'!"
+            )
+        else:
             items[k] = v
     return items
 
@@ -72,10 +72,7 @@ def extract_experiment_params_from_flat_dict(
     experiment_param_class, flat_params: dict[str, Any]
 ):
     experiment_field_keys = list(experiment_param_class.__annotations__.keys())
-    experiment_params_args = fetch_subdict_from_bucket(
-        experiment_field_keys, flat_params
-    )
-    return experiment_params_args
+    return fetch_subdict_from_bucket(experiment_field_keys, flat_params)
 
 
 def get_extracted_experiment_and_flat_hyperion_params(

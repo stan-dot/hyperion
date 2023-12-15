@@ -72,12 +72,11 @@ class XrayCentreZocaloCallback(PlanReactiveCallback):
         ISPYB_LOGGER.info("Zocalo handler received start document.")
         if doc.get("subplan_name") == "do_fgs":
             self.do_fgs_uid = doc.get("uid")
-            if self.ispyb.ispyb_ids.data_collection_ids is not None:
-                assert isinstance(self.ispyb.ispyb_ids.data_collection_ids, tuple)
-                for id in self.ispyb.ispyb_ids.data_collection_ids:
-                    self.zocalo_interactor.run_start(id)
-            else:
+            if self.ispyb.ispyb_ids.data_collection_ids is None:
                 raise ISPyBDepositionNotMade("ISPyB deposition was not initialised!")
+            assert isinstance(self.ispyb.ispyb_ids.data_collection_ids, tuple)
+            for id in self.ispyb.ispyb_ids.data_collection_ids:
+                self.zocalo_interactor.run_start(id)
 
     def activity_gated_stop(self, doc: dict):
         if doc.get("run_start") == self.do_fgs_uid:

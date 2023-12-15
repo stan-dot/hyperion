@@ -30,9 +30,8 @@ class RotationCallbackCollection(AbstractPlanCallbackCollection):
         nexus_handler = RotationNexusFileCallback()
         ispyb_handler = RotationISPyBCallback()
         zocalo_handler = RotationZocaloCallback(ispyb_handler)
-        callback_collection = cls(
+        return cls(
             nexus_handler=nexus_handler,
             ispyb_handler=ispyb_handler,
             zocalo_handler=zocalo_handler,
         )
-        return callback_collection
